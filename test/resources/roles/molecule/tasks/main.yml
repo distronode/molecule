@@ -1,0 +1,16 @@
+---
+- name: Create /etc/molecule
+  distronode.builtin.file:
+    dest: /etc/molecule
+    group: root
+    owner: root
+    mode: "0755"
+    state: directory
+
+- name: Create /etc/molecule/{{ distronode_host }}
+  distronode.builtin.copy:
+    dest: "/etc/molecule/{{ distronode_host }}"
+    group: root
+    owner: root
+    mode: "0644"
+    content: "{{ distronode_host }}"

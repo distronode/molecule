@@ -1,0 +1,17 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install requirements for collection community.molecule
+      distronode.builtin.pip:
+        name: molecule
+      delegate_to: localhost
+
+    - name: Validate that collection was installed
+      distronode.builtin.debug:
+        msg: "{{ 'foo' | community.molecule.header }}"
+
+    - name: Test installed role
+      distronode.builtin.include_role:
+        name: ssbarnea.distronode_role_helloworld
