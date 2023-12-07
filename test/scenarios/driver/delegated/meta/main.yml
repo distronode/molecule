@@ -1,0 +1,10 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: Molecule Developer
+  description: Role to test distronode_compat installation of role
+  namespace: molecule
+  role_name: delegated_test
+  license: GPL
+  min_distronode_version: "2.9"

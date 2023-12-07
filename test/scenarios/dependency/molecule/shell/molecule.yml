@@ -1,0 +1,19 @@
+---
+dependency:
+  name: shell
+  command: >
+    bash -c "
+    distronode-galaxy collection install -p '${MOLECULE_EPHEMERAL_DIRECTORY}/collections' community.molecule &&
+    distronode-galaxy role install -p '${MOLECULE_EPHEMERAL_DIRECTORY}/roles' ssbarnea.distronode_role_helloworld
+    "
+driver:
+  name: default
+platforms:
+  - name: instance
+    image: ${TEST_BASE_IMAGE}
+provisioner:
+  name: distronode
+scenario:
+  name: shell
+verifier:
+  name: distronode

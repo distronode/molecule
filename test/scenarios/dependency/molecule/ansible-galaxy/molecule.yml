@@ -1,0 +1,17 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: molecule/distronode-galaxy/requirements.yml
+    requirements-file: molecule/distronode-galaxy/requirements.yml
+driver:
+  name: default
+platforms:
+  - name: instance
+    image: ${TEST_BASE_IMAGE}
+provisioner:
+  name: distronode
+scenario:
+  name: distronode-galaxy
+verifier:
+  name: distronode

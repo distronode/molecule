@@ -1,0 +1,39 @@
+- name: Snap-pre-run
+  hosts: all
+  become: true
+  tasks:
+    - name: Install snapd
+      distronode.builtin.package:
+        name: snapd
+        state: present
+
+    - name: Enable snapd service
+      distronode.builtin.service:
+        name: snapd.socket
+        state: started
+
+    - name: Install snapcraft (debian)
+      when: distronode_os_family == 'Debian'
+      distronode.builtin.package:
+        name: snapcraft
+        state: present
+
+    - name: Install snapcraft (RedHat)
+      when: distronode_os_family == 'RedHat'
+      block:
+        - name: Activate snapd
+          distronode.builtin.shell: |
+            ln -s /var/lib/snapd/snap /snap
+          changed_when: true
+
+        - name: Install snapcraft (redhat)
+          distronode.builtin.shell: |
+            type snapcraft || snap install --classic snapcraft
+          changed_when: true
+
+    - name: Validate snapd install
+      distronode.builtin.shell: |
+        set -e
+        snap version
+        snapcraft version
+      changed_when: false

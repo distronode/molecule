@@ -1,0 +1,12 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: default
+platforms: []
+provisioner:
+  name: distronode
+scenario:
+  name: distronode-galaxy
+verifier:
+  name: distronode
